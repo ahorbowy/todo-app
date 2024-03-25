@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do App - Tasks</title>
+    <!-- Importowanie stylów CSS z Bootstrapa -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Definiowanie menu nawigacyjnego -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">To Do App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/add_tasks">New Task</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/tasks">Tasks</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Treść strony -->
+    <h1>Tasks</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Priority</th>
+                <th scope="col">Completed</th>
+                <th scope="col">Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Pętla for iterująca przez listę zadań -->
+            {% for task in tasks %}
+            <tr>
+                <!-- Wyświetlanie nazwy zadania -->
+                <td>{{ task.name }}</td>
+                <!-- Wyświetlanie priorytetu zadania -->
+                <td>{{ task.priority }}</td>
+                <!-- Wyświetlanie stanu ukończenia zadania -->
+                <td>{{ 'Yes' if task.completed else 'No' }}</td>
+                <!-- Wyświetlanie daty zadania -->
+                <td>{{ task.date }}</td>
+                <!-- Przyciski do edycji i usuwania zadania -->
+                <td>
+                    <!-- Przycisk do edycji zadania -->
+                    <a href="/update/{{ task.id }}" class="btn btn-primary btn-sm">Edit</a>
+                    <!-- Przycisk do usuwania zadania -->
+                    <a href="/delete/{{ task.id }}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            <!-- Zakończenie pętli for -->
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Importowanie skryptów JavaScript z Bootstrapa -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
